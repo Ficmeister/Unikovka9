@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="cs-cz">
+<head>
+    <meta charset="UTF-8">
+    <title>Matematický příklad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            background-color: #00AF3F;
+        }
+        .example {
+            width: 40vw;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        #whiteBox {
+            display: None;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        #logo {
+            width: 200px;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            margin-right: 20px;
+        }
+        #hint {
+            display: None;
+            width: 25vw;
+            height: auto;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 30vh;
+            right: 20px;
+            }
+        #success {
+            display: None;
+            width: 25vw;
+            height: auto;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 30vh;
+            left: 20px;
+            }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            margin-bottom:30px;
+            font-weight: bold;
+        }
+        h2 {
+        font-size: 50px
+        }
+        #inCorrect {
+            display: None;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <img id="logo" src="logo.png">
+    <h2>Vyřeš příklad</h2>
+    <img id="example" class="example" alt="Matematický příklad">
+    <input type="text" id="answer" placeholder="Zadejte odpověď">
+    <button onclick="checkAnswer()">Odeslat</button>
+    <div id="inCorrect" class="inCorrect">
+    <p>Špatně, zkus to znovu.</p>
+    </div>
+    <img id="success" src="nice.jpg" alt="Správně">
+    <img id="hint" src="meme1.png" alt="Nápověda">
+    <div class="whiteBox" id="whiteBox">
+    <p>1. část kódu je: 777</p>
+    </div>
+
+    <script>
+            const images = [
+                { src: "math1_white.png", correctAnswer: "1" },
+                { src: "math1_green.png", correctAnswer: "2" },
+                { src: "math_example3.png", correctAnswer: "3" },
+                { src: "math_example4.png", correctAnswer: "4" },
+                { src: "math_example5.png", correctAnswer: "5" }
+             ];
+             const memes = [
+                { src: "meme1.jpg"},
+                { src: "meme2.jpg"},
+                { src: "meme3.png"},
+                { src: "meme4.png"},
+                { src: "meme5.png"},
+                { src: "meme6.png"},
+                { src: "meme7.png"},
+                { src: "meme8.png"},
+                { src: "meme9.png"}
+             ];
+             
+        let randomMeme;
+        
+        function setRandomMeme(){
+        randomMeme = memes[Math.floor(Math.random() * memes.length)];
+        const memeElement = document.getElementById("hint");
+        memeElement.src = randomMeme.src;
+        memeElement.classList.add("hint");
+        memeElement.style.display = "block";}
+        
+        let randomMemecorrect;
+        
+        function setRandomMemecorrect(){
+        randomMemecorrect = memes[Math.floor(Math.random() * memes.length)];
+        const memeElementcorrect = document.getElementById("success");
+        memeElementcorrect.src = randomMemecorrect.src;
+        memeElementcorrect.classList.add("success");
+        memeElementcorrect.style.display = "block";}                
+                        
+             
+        let randomImage;
+        
+        function setRandomImage(){
+        randomImage = images[Math.floor(Math.random() * images.length)];
+        const imageElement = document.getElementById("example");
+        imageElement.src = randomImage.src;
+        imageElement.classList.add("example");}
+        const inCorrect = document.getElementById("inCorrect");
+        function checkAnswer() {
+            
+            const userAnswer = document.getElementById("answer").value;
+            const whiteBox = document.getElementById("whiteBox");
+
+
+            if (userAnswer === randomImage.correctAnswer) {
+                hint.style.display = "none";
+                whiteBox.style.display = "block";
+                success.style.display = "block";
+                inCorrect.style.display = "none";
+                setRandomMemecorrect();
+            } else {
+                setRandomMeme();
+                hint.style.display = "block";
+                success.style.display = "none";
+                whiteBox.style.display = "none";
+                inCorrect.style.display = "block";
+            }
+        }
+        window.onload = setRandomImage;
+    </script>
+
+</body>
+</html>
